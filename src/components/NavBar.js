@@ -46,7 +46,7 @@ export default function NavBar() {
               alt="..."
             />
           </IconButton>
-          <ConnectButton />
+          <ConnectButton/>
         </Toolbar>
       </AppBar>
     </Box>
