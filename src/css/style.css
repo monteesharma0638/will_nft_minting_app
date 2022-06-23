@@ -99,10 +99,11 @@
     width: 20rem;
 }
 .icon{
-    background-color: #B3B54B;
-    padding: 0.3rem 0.5rem;
-    border-radius: 50%;
-    box-shadow: 3px 3px gray, -3px -3px gray, 3px -3px gray, -3px 3px gray;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+}
+.icon:hover {
+    transform: scale(2) rotate(360deg);
 }
 .line:before{
     content: "";
@@ -111,7 +112,7 @@
     position: absolute;
     top: 20%;
     left: 57%;
-    background-color: #B3B54B;
+    background-color: #f0a445;
 }
 .step-content{
     color: gray;
