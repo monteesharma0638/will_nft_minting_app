@@ -4,23 +4,13 @@ import {
   Grid,
   Container,
   Typography,
-  Button,
-  ButtonGroup,
   Slide,
   Zoom,
   Box,
   CardMedia,
 } from "@mui/material";
-import { Fade } from "react-slideshow-image";
 import { Link } from "react-router-dom";
 import MintButton from "../../components/MintButton";
-
-const slideImages = [
-  {
-    url: "images/slide_1.jpg",
-    caption: "Slide 1",
-  },
-];
 
 export default function Section1() {
   return (
