@@ -39,7 +39,6 @@ export default function Footer() {
                   color="secondary"
                   component={ListItemButton}
                   disableRipple
-                  disableFocusRipple
                 >
                   <ListItemIcon>
                     <FacebookIcon />
@@ -55,7 +54,6 @@ export default function Footer() {
                   color="secondary"
                   component={ListItemButton}
                   disableRipple
-                  disableFocusRipple
                 >
                   <ListItemIcon>
                     <TwitterIcon />
@@ -70,7 +68,6 @@ export default function Footer() {
                   color="secondary"
                   component={ListItemButton}
                   disableRipple
-                  disableFocusRipple
                 >
                   <ListItemIcon>
                     <TelegramIcon />

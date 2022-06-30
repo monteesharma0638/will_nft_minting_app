@@ -8,7 +8,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const { chains, provider } = configureChains(
-  [ chain.rinkeby],
+  [chain.rinkeby],
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
 );
 const { connectors } = getDefaultWallets({
@@ -57,7 +57,6 @@ const theme = createTheme({
       },
     },
   },
-  spacing: 20,
 });
 
 function ContextProvider({ children }) {

@@ -11,10 +11,10 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Typography from "@mui/material/Typography";
 import Slide from "@mui/material/Slide";
-import CancelIcon from "@mui/icons-material/Cancel";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CircleIcon from "@mui/icons-material/Circle";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+
 import NftContractAbi from "./../abi/NftContract.json";
 import { useContractRead, useContractWrite } from "wagmi";
 import { contractAddress } from "../Config";
@@ -24,33 +24,12 @@ const nftContractArguments = {
   contractInterface: NftContractAbi,
 };
 
-export default function FreeMintCard({ delay, account, setAlert }) {
+export default function PublicMintCard({ delay, setAlert }) {
   const [inputValue, setInputValue] = React.useState(0);
 
-  const freeMintAllowed = useContractRead(
-    nftContractArguments,
-    "freeMintAllowed",
-    {
-      args: [account],
-      watch: true,
-    }
-  ).data;
-
-  const { write, error, isError } = useContractWrite(
-    nftContractArguments,
-    "freeMint"
-  );
-
-  React.useEffect(() => {
-    if (isError) {
-      try {
-        const message = error.message.split("message")[1].split("data")[0];
-        setAlert(message);
-      } catch (err) {
-        setAlert(error.message);
-      }
-    }
-  }, [isError]);
+  const publicMintFee = useContractRead(nftContractArguments, "publicMintFee", {
+    watch: true,
+  }).data;
 
   function handleIncrement() {
     handleChange(inputValue + 1);
@@ -64,18 +43,35 @@ export default function FreeMintCard({ delay, account, setAlert }) {
     if (value !== "") {
       const number = Number(value);
       if (number) {
-        if (number <= freeMintAllowed) {
-          setInputValue(Math.abs(number));
-        }
+        setInputValue(Math.abs(number));
       }
     } else {
       setInputValue(0);
     }
   }
 
-  async function handleFreeMint() {
+  const { write, error, isError } = useContractWrite(
+    nftContractArguments,
+    "publicMint"
+  );
+
+  React.useEffect(() => {
+    if (isError) {
+      try {
+        const message = error.message.split("message")[1].split("data")[0];
+        setAlert(message);
+      } catch (err) {
+        setAlert(error.message);
+      }
+    }
+  }, [isError]);
+
+  async function handlePublicMint() {
     write({
       args: [inputValue],
+      overrides: {
+        value: window.BigInt(Number(publicMintFee) * inputValue),
+      },
     });
   }
 
@@ -85,8 +81,8 @@ export default function FreeMintCard({ delay, account, setAlert }) {
         <CardMedia
           component="img"
           height="200"
-          image="/images/luffy.png"
-          alt="Nft"
+          image="/images/luffyChiba.jpg"
+          alt="green iguana"
         />
         <CardContent>
           <Typography
@@ -96,26 +92,26 @@ export default function FreeMintCard({ delay, account, setAlert }) {
             component="div"
             fontFamily={"Fredoka One, cursive"}
           >
-            Allowed Mint
+            Public Mint
           </Typography>
           <List>
             <ListItem>
               <ListItemIcon>
-                {!Number(freeMintAllowed) ? (
-                  <CancelIcon color="error" />
-                ) : (
-                  <CheckCircleIcon color="success" />
-                )}
+                <CircleIcon />
               </ListItemIcon>
-              <ListItemText primary={`${freeMintAllowed} Free Mint Allowed`} />
+              <ListItemText
+                primary={`Minting fee: ${
+                  Number(publicMintFee) / 10 ** 18
+                } ether`}
+              />
             </ListItem>
           </List>
           <Typography variant="body2" color="text.secondary"></Typography>
           <Button
             fullWidth
             disableRipple
-            startIcon={<RemoveIcon onClick={handleDecrement} color="error" />}
-            endIcon={<AddIcon onClick={handleIncrement} color="action" />}
+            startIcon={<RemoveIcon color="error" onClick={handleDecrement} />}
+            endIcon={<AddIcon color="action" onClick={handleIncrement} />}
             sx={{ "&:hover": { backgroundColor: "transparent" } }}
           >
             <TextField
@@ -126,13 +122,13 @@ export default function FreeMintCard({ delay, account, setAlert }) {
               }}
               variant="standard"
               color="warning"
-              fullWidth
               onChange={(e) => handleChange(e.target.value)}
+              fullWidth
               value={inputValue}
             />
           </Button>
           <ButtonGroup fullWidth disableRipple>
-            <Button color="info" onClick={handleFreeMint}>
+            <Button color="success" onClick={handlePublicMint}>
               Mint
             </Button>
           </ButtonGroup>
