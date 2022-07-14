@@ -1,8 +1,5 @@
 import React from "react";
 import { Container } from "@mui/system";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import TelegramIcon from "@mui/icons-material/Telegram";
 import {
   Box,
   Grid,
@@ -13,7 +10,9 @@ import {
   Link,
   Typography,
   ListItemIcon,
+  Avatar,
 } from "@mui/material";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -41,10 +40,19 @@ export default function Footer() {
                   disableRipple
                 >
                   <ListItemIcon>
-                    <FacebookIcon />
+                    <Avatar
+                      src="/Icons/ethereum.png"
+                      component={motion.div}
+                      whileHover={{
+                        scale: [1, 2, 2, 1, 1],
+                        rotate: [0, 0, 270, 270, 0],
+                        borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+                      }}
+                      alt="etherscan"
+                    />
                   </ListItemIcon>
 
-                  <ListItemText primary="Facebook" />
+                  <ListItemText primary="Etherscan" />
                 </Link>
               </ListItem>
               <ListItem disablePadding>
@@ -56,23 +64,41 @@ export default function Footer() {
                   disableRipple
                 >
                   <ListItemIcon>
-                    <TwitterIcon />
+                    <Avatar
+                      src="/Icons/opensea.png"
+                      component={motion.div}
+                      whileHover={{
+                        scale: [1, 2, 2, 1, 1],
+                        rotate: [0, 0, 270, 270, 0],
+                        borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+                      }}
+                      alt="Opensea"
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="opensea" />
+                </Link>
+              </ListItem>
+              <ListItem disablePadding>
+                <Link
+                  href="#"
+                  underline="always"
+                  color="secondary"
+                  component={ListItemButton}
+                  disableRipple
+                >
+                  <ListItemIcon>
+                    <Avatar
+                      src="/Icons/twitterbutton.png"
+                      component={motion.div}
+                      whileHover={{
+                        scale: [1, 2, 2, 1, 1],
+                        rotate: [0, 0, 270, 270, 0],
+                        borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+                      }}
+                      alt="Twitter"
+                    />
                   </ListItemIcon>
                   <ListItemText primary="Twitter" />
-                </Link>
-              </ListItem>
-              <ListItem disablePadding>
-                <Link
-                  href="#"
-                  underline="always"
-                  color="secondary"
-                  component={ListItemButton}
-                  disableRipple
-                >
-                  <ListItemIcon>
-                    <TelegramIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Telegram" />
                 </Link>
               </ListItem>
             </List>

@@ -1,2 +1,2 @@
 export const chainId = 4;
-export const contractAddress = "0xf04dB27D9cf68B048a82162D7435A2aB46FC81f8";
+export const contractAddress = "0xfa3C8B42FEF6b81E99250fdc909bdF83DF250D48";

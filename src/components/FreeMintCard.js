@@ -107,7 +107,11 @@ export default function FreeMintCard({ delay, account, setAlert }) {
                   <CheckCircleIcon color="success" />
                 )}
               </ListItemIcon>
-              <ListItemText primary={`${freeMintAllowed} Free Mint Allowed`} />
+              <ListItemText
+                primary={`${
+                  freeMintAllowed ? freeMintAllowed : 0
+                } Free Mint Allowed`}
+              />
             </ListItem>
           </List>
           <Typography variant="body2" color="text.secondary"></Typography>

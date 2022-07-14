@@ -8,6 +8,7 @@ const MintButton = (props) => (
     height={60}
     viewBox="0 0 300 60"
     {...props}
+    style={{ cursor: "pointer" }}
   >
     <defs>
       <style>
